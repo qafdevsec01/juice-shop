@@ -2,6 +2,10 @@
  * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
+import metlo from "metlo"
+import dotenv from "dotenv"
+dotenv.config()
+metlo(process.env.METLO_API_KEY as string, "https://app.metlo.com:8081")
 import dataErasure from './routes/dataErasure'
 import fs = require('fs')
 import { Request, Response, NextFunction } from 'express'
