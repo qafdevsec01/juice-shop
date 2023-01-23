@@ -8,8 +8,14 @@ const userLogin = async (url: string) => {
   return await axios.post(`${url}/rest/user/login`, data)
 }
 
-const userWhoAmI = async (url: string) => {
-  await axios.get(`${url}/rest/user/whoami`)
+const userWhoAmI = async (url: string, authToken: string) => {
+  await axios.get(`${url}/rest/user/whoami`,
+    {
+      headers: {
+        "Authorization": `Bearer ${authToken}`
+      }
+    }
+  )
 }
 
 const applicationConfiguration = async (url: string) => {
@@ -45,7 +51,7 @@ const changePassword = async (url: string, authToken: string) => {
   await axios.get(`${url}/rest/user/change-password`, {
     params: { ...query },
     headers: {
-      Authorization: `Bearer ${authToken}`
+      "Authorization": `Bearer ${authToken}`
     }
   })
 }
@@ -54,7 +60,7 @@ const saveLoginIp = async (url: string, authToken: string) => {
   await axios.get(`${url}/rest/saveLoginIp`,
     {
       headers: {
-        Authorization: `Bearer ${authToken}`
+        "Authorization": `Bearer ${authToken}`
       }
     }
   )
@@ -66,12 +72,11 @@ const main = async () => {
     console.error("Please provide url for juice shop server.")
     return
   }
-  const authData = (await userLogin(url))?.data
-  const jwt = authData?.authentication?.token
   for (let i = 0; i < 100; i++) {
+    const authData = (await userLogin(url))?.data
+    const jwt = authData?.authentication?.token
     const promises = [
-      userLogin(url),
-      userWhoAmI(url),
+      userWhoAmI(url, jwt),
       applicationConfiguration(url),
       putReviews(url),
       getReviews(url),
