@@ -34,9 +34,9 @@ const getReviews = async (url: string) => {
   await axios.get(`${url}/rest/products/1/reviews`)
 }
 
-const apiUsers = async (url: string, num: number) => {
+const createUser = async (url: string, num: number, userEmail?: string) => {
   const data = {
-    email: `test-user${num}@juice.shop`,
+    email: userEmail || `test-user${num}@juice.shop`,
     password: "password",
     repeatPassword: "password"
   }
@@ -108,31 +108,41 @@ const getCard = async (url: string, authToken: string, cardId: number) => {
   )
 }
 
+export const initUsers = async (url: string) => {
+  await createUser(url, -1, "user1@juice.shop")
+  await createUser(url, -1, "user2@juice.shop")
+}
+
 const main = async () => {
   const url = process.argv[2]
+  const initUserOnly = Boolean(process.argv[3])
   if (!url) {
     console.error("Please provide url for juice shop server.")
     return
   }
-  console.log("Sending Initial Data...")
-  for (let i = 0; i < 50; i++) {
-    const userEmail = await apiUsers(url, i)
-    const authData = (await userLogin(url, userEmail))?.data
-    const jwt = authData?.authentication?.token
-    const createdCard = (await postCard(url, jwt))?.data
-    const cardId = createdCard?.data?.id
-    const promises = [
-      userWhoAmI(url, jwt),
-      applicationConfiguration(url),
-      putReviews(url),
-      getReviews(url),
-      getQuantitys(url),
-      getCards(url, jwt),
-      getCard(url, jwt, cardId),
-      changePassword(url, jwt),
-      saveLoginIp(url, jwt),
-    ]
-    await Promise.all(promises)
+  console.log("Initializing Users...")
+  await initUsers(url)
+  if (!initUserOnly) {
+    console.log("Sending Initial Data...")
+    for (let i = 0; i < 50; i++) {
+      const userEmail = await createUser(url, i)
+      const authData = (await userLogin(url, userEmail))?.data
+      const jwt = authData?.authentication?.token
+      const createdCard = (await postCard(url, jwt))?.data
+      const cardId = createdCard?.data?.id
+      const promises = [
+        userWhoAmI(url, jwt),
+        applicationConfiguration(url),
+        putReviews(url),
+        getReviews(url),
+        getQuantitys(url),
+        getCards(url, jwt),
+        getCard(url, jwt, cardId),
+        changePassword(url, jwt),
+        saveLoginIp(url, jwt),
+      ]
+      await Promise.all(promises)
+    }
   }
 }
 
