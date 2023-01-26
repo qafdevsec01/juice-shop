@@ -5,7 +5,11 @@
 import metlo from "metlo"
 import dotenv from "dotenv"
 dotenv.config()
-metlo(process.env.METLO_API_KEY as string, "https://app.metlo.com:8081")
+metlo(
+  process.env.METLO_API_KEY as string,
+  "https://app.metlo.com:8081",
+  { apiHost: process.env.API_HOST }
+)
 import dataErasure from './routes/dataErasure'
 import fs = require('fs')
 import { Request, Response, NextFunction } from 'express'
