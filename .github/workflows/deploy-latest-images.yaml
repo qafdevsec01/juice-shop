@@ -1,0 +1,51 @@
+name: Deploy Latest Images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  push-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: "Set tag & labels for ${{ github.ref }}"
+        run: |
+          if [ "$GITHUB_REF" == "refs/heads/master" ]; then
+          echo "DOCKER_TAG=latest" >> $GITHUB_ENV
+          else
+          echo "DOCKER_TAG=snapshot" >> $GITHUB_ENV
+          fi
+          echo "VCS_REF=`git rev-parse --short HEAD`" >> $GITHUB_ENV
+          echo "BUILD_DATE=`date -u +”%Y-%m-%dT%H:%M:%SZ”`" >> $GITHUB_ENV
+      - name: "Build and push for AMD processors"
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/juice-shop:${{ env.DOCKER_TAG }}
+          build-args: |
+            VCS_REF=${{ env.VCS_REF }}
+            BUILD_DATE=${{ env.BUILD_DATE }}
+      - name: "Build and push for ARM processors"
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.arm
+          platforms: linux/arm/v7
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/juice-shop:${{ env.DOCKER_TAG }}-arm
+          build-args: |
+            VCS_REF=${{ env.VCS_REF }}
+            BUILD_DATE=${{ env.BUILD_DATE }}
+
