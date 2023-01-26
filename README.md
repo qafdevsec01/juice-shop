@@ -80,14 +80,14 @@ For a detailed introduction, full list of features and architecture overview ple
 
 ### Packaged Distributions
 
-[![GitHub release](https://img.shields.io/github/downloads/juice-shop/juice-shop/total.svg)](https://github.com/juice-shop/juice-shop/releases/latest)
+[![GitHub release](https://img.shields.io/github/downloads/metlo-labs/juice-shop/total.svg)](https://github.com/metlo-labs/juice-shop/releases/latest)
 [![SourceForge](https://img.shields.io/sourceforge/dm/juice-shop?label=sourceforge%20downloads)](https://sourceforge.net/projects/juice-shop/)
 [![SourceForge](https://img.shields.io/sourceforge/dt/juice-shop?label=sourceforge%20downloads)](https://sourceforge.net/projects/juice-shop/)
 
 1. Install a 64bit [node.js](#nodejs-version-compatibility) on your Windows, MacOS or Linux machine
 2. Download `juice-shop-<version>_<node-version>_<os>_x64.zip` (or
    `.tgz`) attached to
-   [latest release](https://github.com/juice-shop/juice-shop/releases/latest)
+   [latest release](https://github.com/metlo-labs/juice-shop/releases/latest)
 3. Unpack and `cd` into the unpacked folder
 4. Run `npm start`
 5. Browse to <http://localhost:3000>
@@ -98,8 +98,8 @@ For a detailed introduction, full list of features and architecture overview ple
 
 ### Docker Container
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/bkimminich/juice-shop.svg)](https://hub.docker.com/r/bkimminich/juice-shop)
-![Docker Stars](https://img.shields.io/docker/stars/bkimminich/juice-shop.svg)
+[![Docker Pulls](https://img.shields.io/docker/pulls/metlo/juice-shop.svg)](https://hub.docker.com/r/metlo/juice-shop)
+![Docker Stars](https://img.shields.io/docker/stars/metlo/juice-shop.svg)
 [![](https://images.microbadger.com/badges/image/bkimminich/juice-shop.svg)](https://microbadger.com/images/bkimminich/juice-shop
 "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/bkimminich/juice-shop.svg)](https://microbadger.com/images/bkimminich/juice-shop
