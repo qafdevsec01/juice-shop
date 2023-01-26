@@ -67,11 +67,11 @@ For a detailed introduction, full list of features and architecture overview ple
 
 ### From Sources
 
-![GitHub repo size](https://img.shields.io/github/repo-size/juice-shop/juice-shop.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/metlo-labs/juice-shop.svg)
 
 1. Install [node.js](#nodejs-version-compatibility)
-2. Run `git clone https://github.com/juice-shop/juice-shop.git --depth 1` (or
-   clone [your own fork](https://github.com/juice-shop/juice-shop/fork)
+2. Run `git clone https://github.com/metlo-labs/juice-shop.git --depth 1` (or
+   clone [your own fork](https://github.com/metlo-labs/juice-shop/fork)
    of the repository)
 3. Go into the cloned folder with `cd juice-shop`
 4. Run `npm install` (only has to be done before first start or when you change the source code)
@@ -106,8 +106,8 @@ For a detailed introduction, full list of features and architecture overview ple
 "Get your own version badge on microbadger.com")
 
 1. Install [Docker](https://www.docker.com)
-2. Run `docker pull bkimminich/juice-shop`
-3. Run `docker run --rm -p 3000:3000 bkimminich/juice-shop`
+2. Run `docker pull metlo/juice-shop`
+3. Run `docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_API_HOST> --rm -p 3000:3000 metlo/juice-shop`
 4. Browse to <http://localhost:3000> (on macOS and Windows browse to
    <http://192.168.99.100:3000> if you are using docker-machine instead of the native docker installation)
 
@@ -115,8 +115,8 @@ For a detailed introduction, full list of features and architecture overview ple
 
 1. Install [Vagrant](https://www.vagrantup.com/downloads.html) and
    [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
-2. Run `git clone https://github.com/juice-shop/juice-shop.git` (or
-   clone [your own fork](https://github.com/juice-shop/juice-shop/fork)
+2. Run `git clone https://github.com/metlo-labs/juice-shop.git` (or
+   clone [your own fork](https://github.com/metlo-labs/juice-shop/fork)
    of the repository)
 3. Run `cd vagrant && vagrant up`
 4. Browse to [192.168.56.110](http://192.168.56.110)
@@ -135,8 +135,8 @@ For a detailed introduction, full list of features and architecture overview ple
 yum update -y
 yum install -y docker
 service docker start
-docker pull bkimminich/juice-shop
-docker run -d -p 80:3000 bkimminich/juice-shop
+docker pull metlo/juice-shop
+docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_API_HOST> -d -p 80:3000 metlo/juice-shop
 ```
 
 ### Azure Container Instance
@@ -147,7 +147,7 @@ docker run -d -p 80:3000 bkimminich/juice-shop
    and then choose _Bash_ (not PowerShell).
 2. Create a resource group by running `az group create --name <group name> --location <location name, e.g. "centralus">`
 3. Create a new container by
-   running `az container create --resource-group <group name> --name <container name> --image bkimminich/juice-shop --dns-name-label <dns name label> --ports 3000 --ip-address public`
+   running `az container create --resource-group <group name> --name <container name> --image metlo/juice-shop --dns-name-label <dns name label> --ports 3000 --ip-address public`
 4. Your container will be available at `http://<dns name label>.<location name>.azurecontainer.io:3000`
 
 ### Google Compute Engine Instance
@@ -157,7 +157,7 @@ docker run -d -p 80:3000 bkimminich/juice-shop
 2. Launch a new GCE instance based on the juice-shop container. Take note of the `EXTERNAL_IP` provided in the output.
 
 ```
-gcloud compute instances create-with-container owasp-juice-shop-app --container-image bkimminich/juice-shop
+gcloud compute instances create-with-container owasp-juice-shop-app --container-image metlo/juice-shop
 ```
 
 3. Create a firewall rule that allows inbound traffic to port 3000
@@ -182,7 +182,7 @@ Heroku_ button will deploy your forked version of the application.
 
 ### Gitpod 
 
-1. Login to [gitpod.io](https://gitpod.io) and use <https://gitpod.io/#https://github.com/juice-shop/juice-shop/> to start a new workspace. If you want to spin up a forked repository, your URL needs to be adjusted accordingly.
+1. Login to [gitpod.io](https://gitpod.io) and use <https://gitpod.io/#https://github.com/metlo-labs/juice-shop/> to start a new workspace. If you want to spin up a forked repository, your URL needs to be adjusted accordingly.
 
 2. After the Gitpod workspace is loaded, Gitpod tasks is still running to install `npm install`  and launch the website. Despite Gitpod showing your workspace state already as _Running_, you need to wait until the installation process is done, before the website becomes accessable. The _Open Preview Window (Internal Browser)_, will open automatically and refresh itself automatically when the server has started.
 
@@ -201,8 +201,8 @@ Feel free to have a look at the latest version of OWASP Juice Shop:
 
 ### Node.js version compatibility
 
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/cpu/bkimminich/juice-shop)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/os/bkimminich/juice-shop)
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/cpu/metlo-labs/juice-shop)
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/os/metlo-labs/juice-shop)
 
 OWASP Juice Shop officially supports the following versions of
 [node.js](http://nodejs.org) in line with the official
