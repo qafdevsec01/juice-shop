@@ -67,8 +67,7 @@
     "rsn": "ts-node rsn/rsn.ts",
     "rsn:verbose": "ts-node rsn/rsn-verbose.ts",
     "rsn:update": "ts-node rsn/rsn-update.ts",
-    "vagrant": "cd vagrant && vagrant up",
-    "init-metlo": "ts-node scripts/init.ts"
+    "vagrant": "cd vagrant && vagrant up"
   },
   "jest": {
     "preset": "ts-jest",

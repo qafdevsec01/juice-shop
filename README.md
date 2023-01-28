@@ -75,8 +75,13 @@ For a detailed introduction, full list of features and architecture overview ple
    of the repository)
 3. Go into the cloned folder with `cd juice-shop`
 4. Run `npm install` (only has to be done before first start or when you change the source code)
-5. Run `npm start`
-6. Browse to <http://localhost:3000>
+5. Create a `.env` file in the root directory with the following inside:
+```
+METLO_API_KEY=<YOUR_METLO_API_KEY>
+API_HOST=<YOUR_JUICE_SHOP_ADDRESS>
+```
+6. Run `npm start`
+7. Browse to <http://localhost:3000>
 
 ### Packaged Distributions
 
@@ -89,8 +94,13 @@ For a detailed introduction, full list of features and architecture overview ple
    `.tgz`) attached to
    [latest release](https://github.com/metlo-labs/juice-shop/releases/latest)
 3. Unpack and `cd` into the unpacked folder
-4. Run `npm start`
-5. Browse to <http://localhost:3000>
+4. Create a `.env` file in the root directory with the following inside:
+```
+METLO_API_KEY=<YOUR_METLO_API_KEY>
+API_HOST=<YOUR_JUICE_SHOP_ADDRESS>
+```
+5. Run `npm start`
+6. Browse to <http://localhost:3000>
 
 > Each packaged distribution includes some binaries for `sqlite3` and
 > `libxmljs` bound to the OS and node.js version which `npm install` was
@@ -107,7 +117,7 @@ For a detailed introduction, full list of features and architecture overview ple
 
 1. Install [Docker](https://www.docker.com)
 2. Run `docker pull metlo/juice-shop`
-3. Run `docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_API_HOST> --rm -p 3000:3000 metlo/juice-shop`
+3. Run `docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_JUICE_SHOP_ADDRESS> --rm -p 3000:3000 metlo/juice-shop`
 4. Browse to <http://localhost:3000> (on macOS and Windows browse to
    <http://192.168.99.100:3000> if you are using docker-machine instead of the native docker installation)
 
@@ -118,8 +128,9 @@ For a detailed introduction, full list of features and architecture overview ple
 2. Run `git clone https://github.com/metlo-labs/juice-shop.git` (or
    clone [your own fork](https://github.com/metlo-labs/juice-shop/fork)
    of the repository)
-3. Run `cd vagrant && vagrant up`
-4. Browse to [192.168.56.110](http://192.168.56.110)
+3. Update the `vagrant/bootstrap.sh` file by replacing the `METLO_API_KEY` and `API_HOST` environment variables in the docker run command with your values
+4. Run `cd vagrant && vagrant up`
+5. Browse to [192.168.56.110](http://192.168.56.110)
 
 ### Amazon EC2 Instance
 
@@ -147,7 +158,7 @@ docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_API_HOST> -d -p 80:
    and then choose _Bash_ (not PowerShell).
 2. Create a resource group by running `az group create --name <group name> --location <location name, e.g. "centralus">`
 3. Create a new container by
-   running `az container create --resource-group <group name> --name <container name> --image metlo/juice-shop --dns-name-label <dns name label> --ports 3000 --ip-address public`
+   running `az container create --resource-group <group name> --name <container name> --image metlo/juice-shop --environment-variables 'METLO_API_KEY'='<YOUR_METLO_API_KEY>' 'API_HOST'='<YOUR_JUICE_SHOP_ADDRESS>' --dns-name-label <dns name label> --ports 3000 --ip-address public`
 4. Your container will be available at `http://<dns name label>.<location name>.azurecontainer.io:3000`
 
 ### Google Compute Engine Instance
@@ -157,7 +168,7 @@ docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_API_HOST> -d -p 80:
 2. Launch a new GCE instance based on the juice-shop container. Take note of the `EXTERNAL_IP` provided in the output.
 
 ```
-gcloud compute instances create-with-container owasp-juice-shop-app --container-image metlo/juice-shop
+gcloud compute instances create-with-container owasp-juice-shop-app --container-image metlo/juice-shop --container-env=METLO_API_KEY=<YOUR_METLO_API_KEY>,API_HOST=<YOUR_JUICE_SHOP_ADDRESS>
 ```
 
 3. Create a firewall rule that allows inbound traffic to port 3000

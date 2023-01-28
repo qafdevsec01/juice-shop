@@ -22,7 +22,7 @@ apt-get install -qy apache2 docker-ce
 cp /tmp/juice-shop/default.conf /etc/apache2/sites-available/000-default.conf
 
 # Download and start docker image with Juice Shop
-docker run --restart=always -d -p 3000:3000 --name juice-shop bkimminich/juice-shop
+docker run -e METLO_API_KEY=<YOUR_METLO_API_KEY> -e API_HOST=<YOUR_JUICE_SHOP_ADDRESS> --restart=always -d -p 3000:3000 --name juice-shop metlo/juice-shop
 
 # Enable proxy modules in apache and restart
 a2enmod proxy_http
