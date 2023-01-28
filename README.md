@@ -117,7 +117,7 @@ API_HOST=<YOUR_JUICE_SHOP_ADDRESS>
 
 1. Install [Docker](https://www.docker.com)
 2. Run `docker pull metlo/juice-shop`
-3. Run `docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_JUICE_SHOP_ADDRESS> --rm -p 3000:3000 metlo/juice-shop`
+3. Run `docker run -e METLO_API_KEY=<YOUR_METLO_API_KEY> -e API_HOST=<YOUR_JUICE_SHOP_ADDRESS> --rm -p 3000:3000 metlo/juice-shop`
 4. Browse to <http://localhost:3000> (on macOS and Windows browse to
    <http://192.168.99.100:3000> if you are using docker-machine instead of the native docker installation)
 
@@ -147,7 +147,7 @@ yum update -y
 yum install -y docker
 service docker start
 docker pull metlo/juice-shop
-docker run -e METLO_API_KEY=<YOUR_API_KEY> -e API_HOST=<YOUR_API_HOST> -d -p 80:3000 metlo/juice-shop
+docker run -e METLO_API_KEY=<YOUR_METLO_API_KEY> -e API_HOST=<YOUR_JUICE_SHOP_ADDRESS> -d -p 80:3000 metlo/juice-shop
 ```
 
 ### Azure Container Instance
